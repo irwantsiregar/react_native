@@ -5,9 +5,9 @@ import HelloWorld from './components/Hello';
 export default function App() {
   return (
     <View>
-      <HelloWorld />
-      <HelloWorld />
-      <HelloWorld />
+      <HelloWorld name="Irwan"/>
+      <HelloWorld name="Nadia"/>
+      <HelloWorld name="Sheera"/>
     </View>
   )
 }
