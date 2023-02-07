@@ -15,6 +15,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
+  },
+  input: {
+    padding: 8,
+    fontSize: '16px',
+    borderWidth: 1,
+    borderColor: 'blue',
+    borderRadius: 5,
   }
 });
 
