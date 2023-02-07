@@ -1,11 +1,12 @@
 import React from 'react';
-import { View } from 'react-native';
-import HelloWorld from './components/Hello';
+import { View, } from 'react-native';
 
 export default function App() {
   return (
-    <View>
-      <HelloWorld name="Irwan"/>
+    <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: 'red' }} />
+      <View style={{ flex: 2, backgroundColor: 'grey' }} />
+      <View style={{ flex: 3, backgroundColor: 'blue' }} />
     </View>
   )
 }
