@@ -1,20 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Text style={styles.teks}>Hello World!</Text>
     </View>
-  );
+  )
 }
 
+// Styling in react native
+
+// 1. Internal Style
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 10,
+    margin: 20,
   },
+  teks: {
+    marginTop: 16,
+    paddingVertical: 8,
+    borderWidth: 3,
+    borderRadius: 8,
+    backgroundColor: 'lightgrey',
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+  }
 });
