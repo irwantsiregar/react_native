@@ -1,53 +1,30 @@
 import React from 'react';
-import { View, Text, ImageBackground, StyleSheet } from 'react-native';
-import MenuItem from './components/Menu';
+import { View } from 'react-native';
+import Contact from './components/Contact';
 
 export default function App() {
   return (
-    <ImageBackground source={require('./assets/icons/workingspace.jpg')} style={styles.container}>
-      <View style={styles.overlay}>
-        <View style={styles.top}>
-          <Text style={styles.text}>H O M E</Text>
-        </View>
-        <View style={styles.menu}>
-          <MenuItem icon={require('./assets/icons/instagram.png')} />
-          <MenuItem icon={require('./assets/icons/linkedin.png')} />
-          <MenuItem icon={require('./assets/icons/whatsapp.png')} />
-          <MenuItem icon={require('./assets/icons/twitter.png')} />
-        </View>
-      </View>
-    </ImageBackground>
+    <View>
+      <Contact
+        image="https://via.placeholder.com/300/92c952"
+        title="Leonardi Dicaprio"
+        telephone="085762166699"
+      />
+      <Contact
+        image="https://via.placeholder.com/300/92c952"
+        title="Taylor Swift"
+        telephone="085762164479"
+      />
+      <Contact
+        image="https://via.placeholder.com/300/92c952"
+        title="Tom Cruise"
+        telephone="085762167789"
+      />
+      <Contact
+        image="https://via.placeholder.com/300/92c952"
+        title="Hillary Swank"
+        telephone="085762162244"
+      />
+    </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-  },
-  overlay: {
-    flex: 1,
-    backgroundColor: 'rgba(47, 163, 218, .4)'
-  },
-  top: {
-    height: '50%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    color: '#fff',
-    fontSize: 20,
-    borderColor: '#fff',
-    borderWidth: 2,
-    padding: 20,
-    paddingLeft: 40,
-    paddingRight: 40,
-  },
-  menu: {
-    height: '40%',
-    flexDirection: 'row',
-    flexWrap: 'wrap'
-  }
-});
-
