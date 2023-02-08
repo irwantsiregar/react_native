@@ -7,7 +7,7 @@ export default function App() {
     <ImageBackground source={require('./assets/icons/workingspace.jpg')} style={styles.container}>
       <View style={styles.overlay}>
         <View style={styles.top}>
-          <Text style={styles.teks}>H O M E</Text>
+          <Text style={styles.text}>H O M E</Text>
         </View>
         <View style={styles.menu}>
           <MenuItem icon={require('./assets/icons/instagram.png')} />
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  teks: {
+  text: {
     color: '#fff',
     fontSize: 20,
     borderColor: '#fff',

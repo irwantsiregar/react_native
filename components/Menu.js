@@ -4,7 +4,7 @@ import { View, Image, StyleSheet } from 'react-native';
 export default function MenuItem({ icon }) {
   return (
     <View style={styles.item}>
-      <Image source={icon} style={styles.gambar} />
+      <Image source={icon} style={styles.image} />
     </View>
   )
 }
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     width: '33%',
     padding: 25,
   },
-  gambar: {
+  image: {
     height: '100%',
     width: '100%',
   }
