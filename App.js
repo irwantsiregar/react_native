@@ -1,30 +1,30 @@
 import React from 'react';
-import { View } from 'react-native';
-import Contact from './components/Contact';
+import { View, Dimensions, StyleSheet } from 'react-native';
+import MapView from 'react-native-maps'
 
 export default function App() {
   return (
-    <View>
-      <Contact
-        image="https://via.placeholder.com/300/92c952"
-        title="Leonardi Dicaprio"
-        telephone="085762166699"
-      />
-      <Contact
-        image="https://via.placeholder.com/300/92c952"
-        title="Taylor Swift"
-        telephone="085762164479"
-      />
-      <Contact
-        image="https://via.placeholder.com/300/92c952"
-        title="Tom Cruise"
-        telephone="085762167789"
-      />
-      <Contact
-        image="https://via.placeholder.com/300/92c952"
-        title="Hillary Swank"
-        telephone="085762162244"
+    <View style={styles.container}>
+      <MapView style={styles.map}
+        initialRegion={{
+          latitude: -7.797068,
+          longitude: 110.371754,
+          latitudeDelta: 0.009,
+          longitudeDelta: 0.009,
+        }}
       />
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  map: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height
+  }
+})
