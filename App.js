@@ -1,30 +1,18 @@
 import React from 'react';
-import { View } from 'react-native';
-import Contact from './components/Contact';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Home from './components/Home';
+import About from './components/About';
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View>
-      <Contact
-        image="https://via.placeholder.com/300/92c952"
-        title="Leonardi Dicaprio"
-        telephone="085762166699"
-      />
-      <Contact
-        image="https://via.placeholder.com/300/92c952"
-        title="Taylor Swift"
-        telephone="085762164479"
-      />
-      <Contact
-        image="https://via.placeholder.com/300/92c952"
-        title="Tom Cruise"
-        telephone="085762167789"
-      />
-      <Contact
-        image="https://via.placeholder.com/300/92c952"
-        title="Hillary Swank"
-        telephone="085762162244"
-      />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="About" component={About} />
+      </Stack.Navigator>
+    </NavigationContainer>
   )
 }
