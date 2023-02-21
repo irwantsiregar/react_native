@@ -1,54 +1,25 @@
-import React from 'react';
-import { View, Image, } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import Home from './components/Home';
-import Detail from './components/Detail';
-
-const Stack = createStackNavigator();
+import React, { useState, useEffect } from 'react';
+import { View, FlatList, Text } from 'react-native';
 
 export default function App() {
-  const splashScreen = ({ navigation }) => {
-    setTimeout(() => {
-      navigation.replace('Home');
-    }, 5000);
+  const [data, setData] = useState([]);
 
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Image source={require('./assets/logo.png')} style={{ width: 100, height: 100 }} />
-      </View>
-    )
-  }
+  useEffect(() => {
+    fetch('https://raw.githubusercontent.com/algosigma/js-reactjs/master/homestays.json')
+      .then((response) => response.json())
+      .then((responseJson) => setData(responseJson))
+      .catch(error => { console.log; })
+  }, []);
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Splash"
-          component={splashScreen}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{
-            title: 'Employee Data',
-            headerStyle: { backgroundColor: '#006aff' },
-            headerTintColor: '#fff',
-          }}
-        />
-        <Stack.Screen
-          name="Detail"
-          component={Detail}
-          options={{
-            title: 'Detail Employee',
-            headerStyle: { backgroundColor: '#006aff' },
-            headerTintColor: '#fff',
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <View style={{ flex: 1, padding: 24 }}>
+      <FlatList
+        data={data}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) => (
+          <Text>{item.nama} - Rp. {item.harga} Rb</Text>
+        )}
+      />
+    </View >
   )
 }
