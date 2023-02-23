@@ -1,80 +1,79 @@
 import React, { useState, useEffect } from 'react';
-import { View, FlatList, Text, ImageBackground, StyleSheet } from 'react-native';
-import { Card } from 'react-native-paper';
+import { View, FlatList, Text, Image, StyleSheet } from 'react-native';
+import HTMLRender from 'react-native-render-html';
 
 export default function App() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch('https://raw.githubusercontent.com/algosigma/js-reactjs/master/homestays.json')
+    fetch('https://phoneradar.com/wp-json/wp/v2/posts/')
       .then((response) => response.json())
       .then((responseJson) => setData(responseJson))
       .catch(error => { console.log; })
   }, []);
 
-  const listHomeStay = ({ item }) => {
+  const listNews = ({ item }) => {
     return (
-      <Card style={styles.cardUtama}>
-        <View style={styles.containerTitle}>
-          <Text style={styles.title}>{item.nama}</Text>
-        </View>
-        <View style={styles.containerImage}>
-          <ImageBackground
+      <View style={styles.card}>
+        <View style={styles.imageWrapper}>
+          <Image
+            source={{ uri: item.jetpack_featured_media_url }}
             style={styles.image}
-            source={{ uri: item.fotoUrl }}
-          >
-            <Text style={styles.price}>Rp. {item.harga} Rb</Text>
-          </ImageBackground>
+          />
         </View>
-      </Card>
+        <View style={styles.titleWrapper}>
+          <Text style={styles.title}>
+            <HTMLRender html={item.title.rendered} />
+          </Text>
+        </View>
+      </View>
     )
   }
 
   return (
-    <View style={{ flex: 1, padding: 24 }}>
+    <View style={{ flex: 1 }}>
       <FlatList
         data={data}
         keyExtractor={item => item.id}
-        renderItem={listHomeStay}
+        renderItem={listNews}
       />
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  cardUtama: {
-    shadowOffset: {
-      width: 0, height: 2
-    },
-    shadowOpacity: 0.5,
-    height: 220,
-    margin: 10,
+  card: {
+    backgroundColor: '#ffffff',
+    height: 300,
+    margin: 20,
+    borderRadius: 10,
+    shadowColor: 'black',
+    shadowOpacity: 0.25,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 8,
+    elevation: 5,
   },
-  containerTitle: {
-    height: '15%',
-    padding: 7
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: 'gray',
-  },
-  containerImage: {
+  imageWrapper: {
     width: '100%',
-    height: '80%',
-    overflow: 'hidden',
+    height: '60%',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    overflow: 'hidden'
   },
   image: {
     width: '100%',
     height: '100%',
+  },
+  title: {
+    fontFamily: 'Verdana',
+    fontWeight: 'bold',
+  },
+  titleWrapper: {
+    height: '10%',
+    paddingHorizontal: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'flex-end',
-  },
-  price: {
-    fontSize: 16,
-    color: '#fff',
-    fontWeight: 'bold',
-    margin: 10,
+    alignItems: 'center',
+    marginTop: 30,
   },
 });
