@@ -1,79 +1,67 @@
-import React, { useState, useEffect } from 'react';
-import { View, FlatList, Text, Image, StyleSheet } from 'react-native';
-import HTMLRender from 'react-native-render-html';
+import React from 'react';
+import { MaterialIcons } from '@expo/vector-icons';
 
-export default function App() {
-  const [data, setData] = useState([]);
+import Home from './components/Home';
+import Detail from './components/Detail';
+import BestSeller from './components/BestSeller';
 
-  useEffect(() => {
-    fetch('https://phoneradar.com/wp-json/wp/v2/posts/')
-      .then((response) => response.json())
-      .then((responseJson) => setData(responseJson))
-      .catch(error => { console.log; })
-  }, []);
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-  const listNews = ({ item }) => {
-    return (
-      <View style={styles.card}>
-        <View style={styles.imageWrapper}>
-          <Image
-            source={{ uri: item.jetpack_featured_media_url }}
-            style={styles.image}
-          />
-        </View>
-        <View style={styles.titleWrapper}>
-          <Text style={styles.title}>
-            <HTMLRender html={item.title.rendered} />
-          </Text>
-        </View>
-      </View>
-    )
-  }
+const Stack = createStackNavigator();
+const Tabs = createBottomTabNavigator();
 
+function HomeNavigator() {
   return (
-    <View style={{ flex: 1 }}>
-      <FlatList
-        data={data}
-        keyExtractor={item => item.id}
-        renderItem={listNews}
-      />
-    </View>
+    <Stack.Navigator>
+      <Stack.Screen name="Utama" component={Home} options={{
+        title: 'Lokomedia Catalog',
+        headerStyle: { backgroundColor: '#F9813A' },
+        headerTitleAlign: 'center',
+        headerTintColor: '#FFF'
+      }} />
+      <Stack.Screen name="Detail" component={Detail} options={{
+        title: 'Book Detail',
+        headerStyle: { backgroundColor: '#F9813A' },
+        headerTintColor: '#FFF'
+      }} />
+    </Stack.Navigator>
   )
 }
 
-const styles = StyleSheet.create({
-  card: {
-    backgroundColor: '#ffffff',
-    height: 300,
-    margin: 20,
-    borderRadius: 10,
-    shadowColor: 'black',
-    shadowOpacity: 0.25,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 8,
-    elevation: 5,
-  },
-  imageWrapper: {
-    width: '100%',
-    height: '60%',
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    overflow: 'hidden'
-  },
-  image: {
-    width: '100%',
-    height: '100%',
-  },
-  title: {
-    fontFamily: 'Verdana',
-    fontWeight: 'bold',
-  },
-  titleWrapper: {
-    height: '10%',
-    paddingHorizontal: 15,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: 30,
-  },
-});
+function BestNavigator() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Best Seller" component={BestSeller} options={{
+        title: 'Best Seller',
+        headerStyle: { backgroundColor: '#F9813A' },
+        headerTitleAlign: 'center',
+        headerTintColor: '#FFF'
+      }} />
+    </Stack.Navigator>
+  )
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tabs.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ color }) => {
+            let iconName;
+            if (route.name === 'Home') {
+              iconName = 'home';
+            } else if (route.name === 'Best Seller') {
+              iconName = 'star';
+            }
+            return <MaterialIcons name={iconName} size={28} color={color} />
+          }
+        })}
+      >
+        <Tabs.Screen name="Home" component={HomeNavigator} />
+        <Tabs.Screen name="Best Seller" component={BestNavigator} />
+      </Tabs.Navigator>
+    </NavigationContainer>
+  )
+}
